@@ -1,35 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import style from "./App.module.css";
+import { List } from "./components";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const users = [
+    { id: 1, name: "John" },
+    { id: 2, name: "Doe" },
+    { id: 3, name: "Smith" },
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn moreeee
-      </p>
-    </>
-  )
+    <section className={style.container}>
+      <h1>Todo App</h1>
+
+      <h2>Simple List</h2>
+      <List className={style.listContainer}>
+        {users.map((user) => (
+          <List.Item key={user.id} index={user.id}>
+            {user.name}
+          </List.Item>
+        ))}
+      </List>
+
+      <br></br>
+
+      <h2>Selectable List</h2>
+      <List selectable>
+        {users.map((user) => (
+          <List.Item key={user.id} index={user.id}>
+            {user.name}
+          </List.Item>
+        ))}
+      </List>
+
+      <br></br>
+
+      <h2>Nested List</h2>
+      <List selectable>
+        <List.Item key="1" index={1}>
+          Parent 1
+          <List selectable>
+            <List.Item key="1-1" index={1.1}>
+              Child 1
+            </List.Item>
+            <List.Item key="1-2" index={1.2}>
+              Child 2
+            </List.Item>
+          </List>
+        </List.Item>
+
+        <List.Item key="2" index={2}>
+          Parent 2
+          <List>
+            <List.Item key="2-1" index={2.1}>
+              Child 1 (non-selectable)
+            </List.Item>
+            <List.Item key="2-2" index={2.2}>
+              Child 2
+            </List.Item>
+          </List>
+        </List.Item>
+
+        <List.Item key="3" index={3}>
+          Parent 3
+        </List.Item>
+      </List>
+    </section>
+  );
 }
 
-export default App
+export default App;
