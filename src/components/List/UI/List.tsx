@@ -1,8 +1,7 @@
-import { useState, type ReactElement } from "react";
+import React, { useState, type ReactElement } from "react";
 import { initialListContext, ListContext } from "../Context/ListContext";
 import { LIST } from "../Constant";
-import ListItem, { type ListItemProp } from "./ListItem";
-import React from "react";
+import ListItem from "./ListItem";
 
 interface ListProp {
   children: ReactElement<typeof ListItem> | ReactElement<typeof ListItem>[];
